@@ -2,11 +2,11 @@ package jmcgill2.aoc2022.day7
 
 class Directory {
 
-    ArrayList<Directory> lowerDirectories = []
-
     String directoryName
 
-    Directory previousDirecotry
+    Directory previousDirectory
+
+    ArrayList<Directory> lowerDirectories = []
 
     ArrayList<DirectoryFile> files = []
 
@@ -20,14 +20,18 @@ class Directory {
 
     public Directory (String directoryName, Directory previousDirectory) {
         this.directoryName = directoryName
-        this.previousDirecotry = previousDirectory
+        this.previousDirectory = previousDirectory
     }
 
     def calculateDirectorySize() {
         int size = 0
-        size += files.sum{it.fileSize}
+        if (files.size() > 0) {
+            size += files.sum { it.fileSize }
+        }
         lowerDirectories.each{dir ->
+//            println "processing directory ${dir.directoryName}"
             size += dir.calculateDirectorySize()
+//            println "size = $size"
         }
         return size
     }
