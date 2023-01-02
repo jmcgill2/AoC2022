@@ -8,4 +8,9 @@ class DirectoryFile {
 
     int fileSize
 
+    public DirectoryFile(String fileName, int fileSize){
+        this.directoryFileName = fileName
+        this.fileSize = fileSize
+    }
+
 }
